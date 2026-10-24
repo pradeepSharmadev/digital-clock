@@ -1,0 +1,323 @@
+
+@font-face {
+  font-family: "DSEG7";
+  src: url("DSEG7Classic-BoldItalic.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+0020, U+002D, U+0030-0039, U+003A;
+}
+
+:root {
+  color-scheme: dark;
+  --bg: #000;
+  --clock-color: #66b8f0;
+  --date-color: #4c9bca;
+  --selection-color: #66b8f0;
+  --selection-opacity: 35%;
+  --font: "DSEG7", monospace;
+  --font-size: clamp(32px, 11vw, 190px);
+  --font-weight: 700;
+  --italic: italic;
+  --date-gap: 48px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: var(--bg);
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.clock-container {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.clock-display {
+  max-width: 100%;
+  text-align: center;
+  overflow: visible;
+}
+
+.clock-time {
+  display: block;
+  color: var(--clock-color);
+  font-family: var(--font);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  font-style: var(--italic);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.15;
+  white-space: nowrap;
+  user-select: var(--clock-selection, text);
+}
+
+.clock-date {
+  margin-top: var(--date-gap);
+  color: var(--date-color);
+  font: 400 clamp(12px, 2vw, 28px)/1.4 Arial, sans-serif;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.clock-date:empty,
+.clock-date[hidden] {
+  display: none;
+}
+
+::selection {
+  color: #fff;
+  background: color-mix(
+    in srgb,
+    var(--selection-color) var(--selection-opacity),
+    transparent
+  );
+}
+
+.settings {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 5;
+  width: min(300px, calc(100vw - 32px));
+  max-height: 75dvh;
+  scrollbar-width: none;
+  overflow: auto;
+  padding: 14px;
+  border: 1px solid #333;
+  border-radius: 12px;
+  background: #111;
+  color: #eee;
+  font: 14px/1.5 system-ui, sans-serif;
+}
+
+.settings summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.settings label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.settings label:has(input[type="checkbox"]) {
+  flex-direction: row;
+  align-items: center;
+}
+
+.settings input,
+.settings select,
+.settings button {
+  max-width: 100%;
+  accent-color: var(--clock-color);
+}
+
+.settings select,
+.settings button {
+  padding: 8px;
+  border: 1px solid #444;
+  border-radius: 6px;
+  background: #202020;
+  color: #fff;
+}
+
+.settings input[type="range"] {
+  width: 100%;
+}
+
+.settings input[type="color"] {
+  width: 100%;
+  height: 34px;
+}
+
+.settings button {
+  width: 100%;
+  margin-top: 16px;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .clock-container {
+    padding: 12px;
+  }
+
+  :root {
+    --font-size: clamp(32px, 10.7vw, 52px);
+    --date-gap: 30px;
+  }
+
+  .clock-date {
+    letter-spacing: 0.2px;
+  }
+}
+
+@media (max-height: 500px) {
+  :root {
+    --font-size: min(22vh, 100px, 11vw);
+    --date-gap: 16px;
+  }
+}
+
+::selection {
+  color: #000;
+  background: #66b8f0;
+  text-shadow: none;
+}
+
+.settings.fullscreen-hidden {
+  display: none !important;
+}
+
+
+:root {
+  --date-font: "Space Grotesk", sans-serif;
+  --date-size: 20px;
+  --date-color: #4c9bca;
+  --date-weight: 400;
+  --date-spacing: 1px;
+}
+
+.clock-date {
+  display: block;
+  margin-top: var(--date-gap, 48px);
+  color: var(--date-color);
+  font-family: var(--date-font);
+  font-size: var(--date-size);
+  font-weight: var(--date-weight);
+  letter-spacing: var(--date-spacing);
+  line-height: 1.4;
+  text-align: center;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.clock-date:empty,
+.clock-date[hidden] {
+  display: none;
+}
+
+.date-settings {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 12px;
+  border: 1px solid #383838;
+  border-radius: 8px;
+}
+
+.date-settings legend {
+  padding: 0 5px;
+  font-weight: 700;
+}
+
+.date-settings label {
+  margin-top: 4px;
+  color: #ddd;
+  font-size: 13px;
+}
+
+.date-settings select,
+.date-settings input {
+  width: 100%;
+  max-width: 100%;
+}
+
+.date-settings select {
+  padding: 8px;
+  border: 1px solid #444;
+  border-radius: 6px;
+  background: #202020;
+  color: #fff;
+}
+
+.date-settings input[type="range"] {
+  accent-color: var(--date-color);
+}
+
+
+@media (max-width: 480px) {
+  :root {
+    --date-size: 12px;
+    --date-spacing: 0.2px;
+  }
+
+  .clock-date {
+    white-space: normal;
+  }
+}
+
+/* .divider {
+  margin: 16px 0;
+  border: none;
+  border-top: 1px solid #383838;
+} */
+
+
+.owner-credit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid #292929;
+  text-align: center;
+  font-family: system-ui, sans-serif;
+}
+
+.owner-label {
+  color: #888;
+  font-size: 11px;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+}
+
+.owner-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--clock-color, #66b8f0);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.owner-link:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.owner-link:focus-visible {
+  outline: 2px solid var(--clock-color, #66b8f0);
+  outline-offset: 4px;
+  border-radius: 3px;
+}
+
+.external-icon {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
+.owner-caption {
+  color: #666;
+  font-size: 11px;
+}

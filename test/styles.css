@@ -1,0 +1,122 @@
+
+@font-face {
+  font-family: "DSEG7";
+  src: url("./DSEG7Classic-BoldItalic.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+0020, U+002D, U+0030-0039, U+003A;
+}
+
+:root {
+  color-scheme: dark;
+  --page-bg: #000;
+  --clock-blue: #66b8f0;
+  --date-blue: #4c9bca;
+  --page-text: #fff;
+  --clock-font: "DSEG7", monospace;
+  --clock-size: clamp(32px, 11vw, 190px);
+  --clock-padding: 0;
+  --date-gap: 70px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: var(--page-bg);
+  color: var(--page-text);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.clock-container {
+  display: flex;
+  min-height: 100vh;
+  min-height: 100dvh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.clock-display {
+  max-width: 100%;
+  margin-inline: auto;
+  padding: var(--clock-padding);
+  line-height: 1;
+  overflow: visible;
+}
+
+.clock-time {
+  display: block;
+  color: var(--clock-blue);
+  font-family: var(--clock-font);
+  font-size: var(--clock-size);
+  font-style: italic;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.clock-date {
+  margin-top: var(--date-gap);
+  color: var(--date-blue);
+  font-size: clamp(11px, 2vw, 31px);
+  letter-spacing: 1px;
+  line-height: 1.4;
+  text-align: center;
+  white-space: nowrap;
+}
+
+::selection {
+  color: #fff;
+  background: rgb(102 184 240 / 35%);
+}
+
+@media (max-width: 900px) {
+  :root {
+    --clock-size: clamp(42px, 11vw, 100px);
+    --date-gap: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --clock-size: clamp(32px, 10.7vw, 52px);
+    --date-gap: 34px;
+  }
+
+  .clock-container {
+    padding: 12px;
+  }
+
+  .clock-date {
+    letter-spacing: 0.2px;
+  }
+}
+
+@media (max-height: 500px) {
+  :root {
+    --clock-size: min(22vh, 100px, 11vw);
+    --date-gap: 20px;
+  }
+
+  .clock-date {
+    font-size: clamp(12px, 4vh, 22px);
+  }
+}
