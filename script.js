@@ -7,7 +7,7 @@ const dateEl = $("clockDate");
 const defaults = {
   font: "digital",
   weight: "700",
-  size: "100",
+  size: "150",
   color: "#66b8f0",
   selection: "#66b8f0",
   opacity: "35",
@@ -66,26 +66,38 @@ function applySettings() {
 
 function updateClock() {
   const now = new Date();
+  const selectedZone = $("timeZone").value;
 
   const options = {
     hour: "2-digit",
     minute: "2-digit",
-    hour12: false,
+    hour12: $("hour12").checked,
   };
 
   if ($("showSeconds").checked) {
     options.second = "2-digit";
   }
 
+  // Apply the selected time zone
+  if (selectedZone !== "local") {
+    options.timeZone = selectedZone;
+  }
+
   timeEl.textContent = new Intl.DateTimeFormat("en-GB", options).format(now);
 
+  const dateOptions = {
+    weekday: "long",
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  };
+
+  if (selectedZone !== "local") {
+    dateOptions.timeZone = selectedZone;
+  }
+
   dateEl.textContent = now
-    .toLocaleDateString("en-GB", {
-      weekday: "long",
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-    })
+    .toLocaleDateString("en-GB", dateOptions)
     .toUpperCase();
 }
 
@@ -123,12 +135,12 @@ $("resetSettings").addEventListener("click", () => {
   $("selectionOpacity").value = defaults.opacity;
   $("showDate").checked = defaults.date;
   $("showSeconds").checked = defaults.seconds;
+  $("hour12").checked = defaults.hour12;
   $("italicClock").checked = defaults.italic;
   $("disableSelection").checked = defaults.disableSelection;
 
   applySettings();
 });
-
 
 document.addEventListener("DOMContentLoaded", () => {
   const settings = document.querySelector(".settings");
@@ -154,11 +166,8 @@ document.addEventListener("DOMContentLoaded", () => {
   updateSettingsVisibility();
 });
 
-
-
 applySettings();
 setInterval(updateClock, 250);
-
 
 document.querySelector("#fullscreenBtn").addEventListener("click", async () => {
   try {
@@ -171,7 +180,6 @@ document.querySelector("#fullscreenBtn").addEventListener("click", async () => {
     console.error("Fullscreen failed:", error);
   }
 });
-
 
 const dateFonts = {
   minimal: '"Space Grotesk", sans-serif',
@@ -220,3 +228,33 @@ function updateDateStyle() {
 );
 
 updateDateStyle();
+
+document.addEventListener("keydown", async (event) => {
+  // Ignore shortcuts while typing in form controls
+  if (
+    event.target.matches("input, select, textarea") ||
+    event.target.isContentEditable
+  ) {
+    return;
+  }
+
+  // Press F to toggle fullscreen
+  if (
+    event.key.toLowerCase() === "f" &&
+    !event.ctrlKey &&
+    !event.altKey &&
+    !event.metaKey
+  ) {
+    event.preventDefault();
+
+    try {
+      if (!document.fullscreenElement) {
+        await document.documentElement.requestFullscreen();
+      } else {
+        await document.exitFullscreen();
+      }
+    } catch (error) {
+      console.error("Fullscreen failed:", error);
+    }
+  }
+});

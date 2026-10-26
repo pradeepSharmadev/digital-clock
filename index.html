@@ -95,12 +95,25 @@
         <fieldset class="date-settings">
           <legend>Action Fullscreen</legend>
           <button id="fullscreenBtn" aria-label="Toggle fullscreen mode">
-            Go Fullscreen/Esc
+            Fullscreen (F) / Exit (Esc)
           </button>
         </fieldset>
         <!-- <hr class="divider" /> -->
         <fieldset class="date-settings">
           <legend>Customize clock</legend>
+          <label>
+            Time Zone
+            <select id="timeZone">
+              <option value="local">Local Time</option>
+              <option value="Asia/Kolkata" selected>
+                India (IST · UTC+5:30)
+              </option>
+              <option value="UTC">UTC (Universal Time)</option>
+              <option value="America/New_York">New York (ET)</option>
+              <option value="Europe/London">London (GMT/BST)</option>
+              <option value="Asia/Tokyo">Tokyo (JST)</option>
+            </select>
+          </label>
           <label>
             Font style
             <select id="fontStyle">
@@ -127,7 +140,7 @@
 
           <label>
             Clock size
-            <input id="fontSize" type="range" min="32" max="190" value="100" />
+            <input id="fontSize" type="range" min="32" max="190" value="150" />
           </label>
 
           <label>
@@ -200,6 +213,11 @@
         <label>
           <input id="italicClock" type="checkbox" checked />
           Italic clock
+        </label>
+
+        <label>
+          <input id="hour12" type="checkbox" unchecked />
+          Show 12-Hour
         </label>
 
         <label>
