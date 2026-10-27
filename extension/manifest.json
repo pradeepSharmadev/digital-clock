@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Digital Clock",
+  "version": "1.0.0",
+  "description": "Open the digital clock in a new tab",
+  "icons": {
+    "16": "favicon1.png",
+    "48": "favicon1.png",
+    "128": "favicon1.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Open Digital Clock"
+  },
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "permissions": ["tabs"]
+}

@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="icon" type="image/png" href="./favicon1.png" />
+
+    <!-- Basic SEO -->
+    <title>Digital Clock - Pradeep Sharma</title>
+    <meta
+      name="description"
+      content="A customizable digital clock designed and developed by Pradeep Sharma, Full Stack Developer and Product Engineer. Explore more projects at pradeep-sharma.vercel.app."
+    />
+    <meta name="author" content="Pradeep Sharma" />
+    <meta name="creator" content="Pradeep Sharma" />
+    <meta name="application-name" content="Digital Clock" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Canonical URL: change this to your clock's actual public URL -->
+    <link rel="canonical" href="https://digital-clock-pro.vercel.app/" />
+
+    <!-- Portfolio -->
+    <link rel="author" href="https://pradeep-sharma.vercel.app/" />
+    <meta name="url" content="https://pradeep-sharma.vercel.app/" />
+
+    <!-- Open Graph: Facebook, LinkedIn, messaging previews -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Digital Clock | Pradeep Sharma" />
+    <meta
+      property="og:description"
+      content="A minimal, customizable digital clock crafted by Pradeep Sharma, Full Stack Developer and Product Engineer."
+    />
+    <meta property="og:url" content="https://digital-clock-pro.vercel.app/" />
+    <meta property="og:site_name" content="Pradeep Sharma" />
+    <meta property="og:locale" content="en_IN" />
+
+    <!-- X / Twitter sharing -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Digital Clock | Pradeep Sharma" />
+    <meta
+      name="twitter:description"
+      content="A minimal digital clock with customizable typography, colors, and display settings."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./script.js" defer></script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Digital Clock",
+        "description": "A responsive digital clock featuring customizable fonts, colors, date visibility, and seconds display.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "author": {
+          "@type": "Person",
+          "name": "Pradeep Sharma",
+          "url": "https://pradeep-sharma.vercel.app/",
+          "jobTitle": "Full Stack Developer & Product Engineer",
+          "knowsAbout": [
+            "JavaScript",
+            "TypeScript",
+            "React",
+            "Next.js",
+            "Node.js",
+            "Web Development",
+            "Responsive UI Design"
+          ]
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <main class="clock-container">
+      <section class="clock-display" id="clockDisplay">
+        <time class="clock-time" id="clockTime">12:45:38</time>
+        <time class="clock-date" id="clockDate"></time>
+      </section>
+
+      <details class="settings">
+        <summary>Customize clock</summary>
+        <fieldset class="date-settings">
+          <legend>Action Fullscreen</legend>
+          <button id="fullscreenBtn" aria-label="Toggle fullscreen mode">
+            Fullscreen (F) / Exit (Esc)
+          </button>
+        </fieldset>
+        <!-- <hr class="divider" /> -->
+        <fieldset class="date-settings">
+          <legend>Customize clock</legend>
+          <label>
+            Time Zone
+            <select id="timeZone">
+              <option value="local">Local Time</option>
+              <option value="Asia/Kolkata" selected>
+                India (IST · UTC+5:30)
+              </option>
+              <option value="UTC">UTC (Universal Time)</option>
+              <option value="America/New_York">New York (ET)</option>
+              <option value="Europe/London">London (GMT/BST)</option>
+              <option value="Asia/Tokyo">Tokyo (JST)</option>
+            </select>
+          </label>
+          <label>
+            Font style
+            <select id="fontStyle">
+              <option value="digital">DSEG7 Digital</option>
+              <option value="mono">Roboto Mono</option>
+              <option value="space">Space Grotesk</option>
+              <option value="rounded">Nunito Rounded</option>
+              <option value="futuristic">Orbitron Futuristic</option>
+              <option value="system">System Sans</option>
+              <option value="serif">Classic Serif</option>
+              <option value="terminal">Terminal Green</option>
+            </select>
+          </label>
+
+          <label>
+            Font weight
+            <select id="fontWeight">
+              <option value="400">Regular</option>
+              <option value="500">Medium</option>
+              <option value="700" selected>Bold</option>
+              <option value="800">Extra Bold</option>
+            </select>
+          </label>
+
+          <label>
+            Clock size
+            <input id="fontSize" type="range" min="32" max="190" value="150" />
+          </label>
+
+          <label>
+            Clock color
+            <input id="clockColor" type="color" value="#66b8f0" />
+          </label>
+
+          <label>
+            Selection highlight
+            <input id="selectionColor" type="color" value="#66b8f0" />
+          </label>
+
+          <label>
+            Selection opacity
+            <input
+              id="selectionOpacity"
+              type="range"
+              min="0"
+              max="100"
+              value="35"
+            />
+          </label>
+        </fieldset>
+
+        <fieldset class="date-settings">
+          <legend>Customize date</legend>
+
+          <label for="dateStyle">Date font style</label>
+          <select id="dateStyle">
+            <option value="minimal">Minimal — Space Grotesk</option>
+            <option value="technical">Technical — Roboto Mono</option>
+            <option value="futuristic">Futuristic — Orbitron</option>
+            <option value="classic">Classic — Georgia</option>
+          </select>
+
+          <label for="dateSize">Date size</label>
+          <input id="dateSize" type="range" min="10" max="36" value="20" />
+
+          <label for="dateColor">Date color</label>
+          <input id="dateColor" type="color" value="#4c9bca" />
+
+          <label for="dateWeight">Date weight</label>
+          <select id="dateWeight">
+            <option value="400">Regular</option>
+            <option value="500">Medium</option>
+            <option value="700">Bold</option>
+          </select>
+
+          <label for="dateSpacing">Letter spacing</label>
+          <input
+            id="dateSpacing"
+            type="range"
+            min="0"
+            max="4"
+            step="0.1"
+            value="1"
+          />
+        </fieldset>
+
+        <label>
+          <input id="showDate" type="checkbox" checked />
+          Show date
+        </label>
+
+        <label>
+          <input id="showSeconds" type="checkbox" checked />
+          Show seconds
+        </label>
+
+        <label>
+          <input id="italicClock" type="checkbox" checked />
+          Italic clock
+        </label>
+
+        <label>
+          <input id="hour12" type="checkbox" unchecked />
+          Show 12-Hour
+        </label>
+
+        <label>
+          <input id="disableSelection" type="checkbox" />
+          Disable text selection
+        </label>
+
+        <button id="resetSettings" type="button">Reset settings</button>
+
+        <footer class="owner-credit">
+          <span class="owner-label">Designed & developed by</span>
+
+          <a
+            class="owner-link"
+            href="https://pradeep-sharma.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Visit Pradeep Sharma's portfolio"
+          >
+            Pradeep Sharma
+            <svg class="external-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M14 3h7v7m0-7L10 14M19 13v7H4V5h7"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </a>
+
+          <span class="owner-caption">
+            Full Stack Developer | React, Next.js, Node.js
+          </span>
+
+          <a
+            class="portfolio-link"
+            href="https://pradeep-sharma.vercel.app/about"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn more about me →
+          </a>
+        </footer>
+      </details>
+    </main>
+  </body>
+</html>
