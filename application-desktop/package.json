@@ -1,0 +1,43 @@
+{
+  "name": "digital-clock-pro-desktop",
+  "version": "1.0.0",
+  "description": "Digital Clock Pro desktop application",
+  "main": "main.js",
+  "author": "Digital Clock - Pradeep Sharma",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win nsis",
+    "build:portable": "electron-builder --win portable"
+  },
+  "build": {
+    "appId": "com.digitalclockpro.app",
+    "productName": "Digital Clock Pro",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "main.js",
+      "index.html",
+      "styles.css",
+      "script.js",
+      "favicon1.png",
+      "DSEG7Classic-BoldItalic.woff2"
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "devDependencies": {
+    "electron": "^45.1.0",
+    "electron-builder": "^26.18.0"
+  }
+}
